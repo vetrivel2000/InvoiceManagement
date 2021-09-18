@@ -18,7 +18,7 @@ public class InvoiceRunner {
         ArrayList<Invoice> invoices=new ArrayList<>();
         ArrayList<Item> items = new ArrayList<>();
         do {
-            System.out.println("1.AddCustomer\n2.AddInvoice\n3.AddItem\n4.PrintAllCustomers\n5.PrintAllInvoices\n6.InvoicesOfACustomer\n7.DetailsOfAnInvoice");
+            System.out.println("1.AddCustomer\n2.AddInvoice\n3.AddItem\n4.PrintAllCustomers\n5.PrintAllInvoices\n6.InvoicesOfACustomer\n7.DetailsOfAnInvoice\n8.Exit");
             option=scan.nextInt();
             switch (option)
             {
