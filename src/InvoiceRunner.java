@@ -1,12 +1,14 @@
 import logical.LogicalLayer;
 import pojo.Customer;
 import pojo.Invoice;
+import pojo.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class InvoiceRunner {
+    static double totalPrice=0;
     public static void main(String[] args)
     {
         Scanner scan= new Scanner(System.in);
@@ -14,6 +16,7 @@ public class InvoiceRunner {
         int option;
         ArrayList<Customer> customers= new ArrayList<>();
         ArrayList<Invoice> invoices=new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
         do {
             System.out.println("1.AddCustomer\n2.AddInvoice\n3.AddItem\n4.PrintAllCustomers\n5.PrintAllInvoices\n6.InvoicesOfACustomer\n7.DetailsOfAnInvoice");
             option=scan.nextInt();
@@ -38,12 +41,15 @@ public class InvoiceRunner {
                     System.out.println("Enter CustomerId");
                     int customerId= scan.nextInt();
                     System.out.println("Enter Item");
-                    String item= scan.next();
+                    String itemName = scan.next();
                     System.out.println("Enter price");
                     double price= scan.nextDouble();
                     int invoiceId= logical.generateInvoiceId();
                     System.out.println("Your invoiceId is:"+invoiceId);
-                    Invoice invoice=logical.getInvoiceObject(customerId,item,price,invoiceId);
+                    Item item=logical.getItemObject(itemName,price);
+                    items.add(item);
+                    totalPrice+=price;
+                    Invoice invoice=logical.getInvoiceObject(customerId, items,totalPrice,invoiceId);
                     invoices.add(invoice);
                     logical.storeIntoMap(invoice);
                     break;
@@ -55,10 +61,13 @@ public class InvoiceRunner {
                     System.out.println("Enter invoiceId");
                     int invoiceId= scan.nextInt();
                     System.out.println("Enter Item");
-                    String item= scan.next();
+                    String itemName = scan.next();
                     System.out.println("Enter price");
                     double price= scan.nextDouble();
-                    Invoice invoice=logical.getInvoiceObject(customerId,item,price,invoiceId);
+                    Item item=logical.getItemObject(itemName,price);
+                    items.add(item);
+                    totalPrice+=price;
+                    Invoice invoice=logical.getInvoiceObject(customerId, items,totalPrice,invoiceId);
                     invoices.add(invoice);
                     logical.storeIntoMap(invoice);
                     break;
@@ -81,7 +90,7 @@ public class InvoiceRunner {
                 {
                     System.out.println("Enter your CustomerId");
                     int customerId=scan.nextInt();
-                    HashMap<Integer,HashMap<Integer,ArrayList<Invoice>>> customerMap= logical.getCustomerMap();
+                    HashMap<Integer,HashMap<Integer,Invoice>> customerMap= logical.getCustomerMap();
                     System.out.println(customerMap.get(customerId));
                     break;
                 }
@@ -89,7 +98,7 @@ public class InvoiceRunner {
                 {
                     System.out.println("Enter your InvoiceId");
                     int invoiceId= scan.nextInt();
-                    HashMap<Integer,ArrayList<Invoice>> invoiceMap=logical.getInvoiceMap();
+                    HashMap<Integer,Invoice> invoiceMap=logical.getInvoiceMap();
                     System.out.println(invoiceMap.get(invoiceId));
                     break;
                 }

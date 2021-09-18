@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoadToMemory {
-    HashMap<Integer, HashMap<Integer, ArrayList<Invoice>>> customerHashMap=new HashMap<>();
-    HashMap<Integer, ArrayList<Invoice>> invoiceHashMap;
-    ArrayList<Invoice> invoiceList;
+    HashMap<Integer, HashMap<Integer, Invoice>> customerHashMap=new HashMap<>();
+    HashMap<Integer, Invoice> invoiceHashMap;
 
     public void addToMap(Invoice invoice)
     {
@@ -18,27 +17,15 @@ public class LoadToMemory {
             {
                 invoiceHashMap=new HashMap<>();
                 customerHashMap.put(customerId,invoiceHashMap);
-                int invoiceId=invoice.getInvoiceId();
-                invoiceList=invoiceHashMap.get(invoiceId);
                 //                invoiceList.add(invoice);
             }
-            else
-            {
-                int invoiceId=invoice.getInvoiceId();
-                invoiceList=invoiceHashMap.get(invoiceId);
-            }
-            if(invoiceList==null)
-            {
-                invoiceList=new ArrayList<>();
-            }
-            invoiceList.add(invoice);
-            invoiceHashMap.put(invoice.getInvoiceId(),invoiceList);
+            invoiceHashMap.put(invoice.getInvoiceId(),invoice);
     }
-    public HashMap<Integer,HashMap<Integer,ArrayList<Invoice>>> getCustomerHashMap()
+    public HashMap<Integer,HashMap<Integer,Invoice>> getCustomerHashMap()
     {
         return customerHashMap;
     }
-    public HashMap<Integer,ArrayList<Invoice>> getInvoiceHashMap()
+    public HashMap<Integer,Invoice> getInvoiceHashMap()
     {
         return invoiceHashMap;
     }

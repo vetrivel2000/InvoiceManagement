@@ -1,10 +1,12 @@
 package pojo;
 
+import java.util.ArrayList;
+
 public class Invoice {
     private int invoiceId;
     private int customerId;
-    private String item;
-    private double price;
+    private ArrayList<Item> items;
+    private double totalPrice;
 
     public int getInvoiceId() {
         return invoiceId;
@@ -22,19 +24,20 @@ public class Invoice {
         this.customerId = customerId;
     }
 
-    public String getItem() {
-        return item;
-    }
-    public void setItem(String item) {
-        this.item = item;
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
-    public double getPrice() {
-        return price;
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
@@ -42,8 +45,8 @@ public class Invoice {
         return "Invoice{" +
                 "invoiceId=" + invoiceId +
                 ", customerId=" + customerId +
-                ", item='" + item + '\'' +
-                ", price=" + price +
+                ", items=" + items +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }

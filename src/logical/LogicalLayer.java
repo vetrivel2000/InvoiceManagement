@@ -3,6 +3,7 @@ package logical;
 import load.LoadToMemory;
 import pojo.Customer;
 import pojo.Invoice;
+import pojo.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +21,20 @@ public class LogicalLayer {
         object.setCustomerId(customerId);
         return object;
     }
-    public Invoice getInvoiceObject(int customerId,String item,double price,int invoiceId)
+    public Invoice getInvoiceObject(int customerId,ArrayList<Item> items,double price,int invoiceId)
     {
         Invoice object= new Invoice();
         object.setCustomerId(customerId);
-        object.setItem(item);
-        object.setPrice(price);
+        object.setItems(items);
+        object.setTotalPrice(price);
         object.setInvoiceId(invoiceId);
+        return object;
+    }
+    public Item getItemObject(String itemName,double price)
+    {
+        Item object= new Item();
+        object.setItemName(itemName);
+        object.setPrice(price);
         return object;
     }
     public void storeIntoMap(Invoice invoices)
@@ -43,11 +51,11 @@ public class LogicalLayer {
         invoiceId++;
         return invoiceId;
     }
-    public HashMap<Integer,HashMap<Integer,ArrayList<Invoice>>> getCustomerMap()
+    public HashMap<Integer,HashMap<Integer,Invoice>> getCustomerMap()
     {
         return load.getCustomerHashMap();
     }
-    public HashMap<Integer,ArrayList<Invoice>> getInvoiceMap()
+    public HashMap<Integer,Invoice> getInvoiceMap()
     {
         return load.getInvoiceHashMap();
     }
