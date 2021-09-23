@@ -1,5 +1,4 @@
 package logical;
-
 import load.LoadToMemory;
 import pojo.Customer;
 import pojo.Invoice;
